@@ -5,8 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -19,9 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
 
 /**
  * 
@@ -42,7 +37,6 @@ public class GUI {
 	private JLabel charCount;
 	
 	AbstractDocument fieldDoc;
-	FieldDocFilter docFilter;
 	
 	/**
 	 * Constructor. Build GUI-components.
@@ -84,8 +78,6 @@ public class GUI {
 		button.setEnabled(false);
 		//addFieldLimit();
 		addFieldCharCounter();
-		docFilter = new FieldDocFilter();
-		fieldDoc.setDocumentFilter(docFilter);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(580, 220);
@@ -167,58 +159,7 @@ public class GUI {
 			charCount.setText("Number of characters typed: " + docLength);
 		}
 		
-		button.setEnabled((docLength == 16) ? true : false);
-	}
-	
-	public class FieldDocFilter extends DocumentFilter {
-		public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) {
-			if (fieldDoc.getLength() < 16) {
-				System.out.println("Filter insert!");
-				try {
-					super.insertString(fb, offset, string, attr);
-				}
-				catch (BadLocationException e) {
-					e.printStackTrace();
-				}
-				limitDocLength(fb);
-			}
-		}
-		public void remove(DocumentFilter.FilterBypass fb, int offset, int length) {
-			System.out.println("Filter remove!");
-			try {
-				super.remove(fb, offset, length);
-			}
-			catch (BadLocationException e) {
-				e.printStackTrace();
-			}
-		}
-		public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) {
-			if (fieldDoc.getLength() < 16) {
-				System.out.println("Filter replace!");
-				try {
-					super.replace(fb, offset, length, text, attrs);
-				}
-				catch (BadLocationException e) {
-					e.printStackTrace();
-				}
-				limitDocLength(fb);
-			}
-		}
-	}
-
-	/**
-	 * Limit the length of the document to 16 characters. Even though that
-	 * length is already checked by if-statements in the Filter's methods it's
-	 * length might still be > 16 when the user has pasted a long string in the
-	 * textfield. If so, chop-off all characters after the 16th.
-	 * @param fb  The FilterBypass provided by the DocumentFilter.
-	 */
-	private void limitDocLength(DocumentFilter.FilterBypass fb) {
-		if (fieldDoc.getLength() > 16) {
-			System.out.println("GROTER DAN 16!");
-			System.out.println("Removing alles behalve eerste zestien...");
-			docFilter.remove(fb, 16, fieldDoc.getLength() - 16);
-		}
+		button.setEnabled((docLength >= 16) ? true : false);
 	}
 	
 	public static void main(String[] args) {

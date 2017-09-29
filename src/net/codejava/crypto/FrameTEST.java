@@ -2,9 +2,12 @@ package net.codejava.crypto;
 
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -16,7 +19,8 @@ public class FrameTEST {
 	
 	private JFrame frame;
 	private JPanel mainCardPanel;
-	TimerListener timerListener;
+	private FyleChooserTEST chooser = new FyleChooserTEST();
+	//TimerListener timerListener;
 	
 	public FrameTEST() {
 		frame = new JFrame("File Crypto");
@@ -24,27 +28,31 @@ public class FrameTEST {
 		JPanel contentPane = (JPanel)frame.getContentPane();
 		contentPane.setLayout(new GridBagLayout());
 		
-		mainCardPanel = new JPanel(new CardLayout());
+		CardLayout cardLayout = new CardLayout();
+		mainCardPanel = new JPanel(cardLayout);
 		contentPane.add(mainCardPanel);
 		
-		EncryptPanel encryptPanel = new EncryptPanel();
+		StartPanel startPanel = new StartPanel(mainCardPanel, cardLayout);
+		mainCardPanel.add(startPanel);
+		
+		EncryptPanel encryptPanel = new EncryptPanel(mainCardPanel, cardLayout);
 		mainCardPanel.add(encryptPanel);
 		
-		DecryptPanel decryptPanel = new DecryptPanel();
+		DecryptPanel decryptPanel = new DecryptPanel(mainCardPanel, cardLayout);
 		mainCardPanel.add(decryptPanel);
 		
-		timerListener = new TimerListener();
-		Timer timer = new Timer(100, timerListener);
-	 	timer.setDelay(3000);
-		timer.start();
+		//timerListener = new TimerListener();
+		//Timer timer = new Timer(4000, timerListener);
+	 	//timer.setDelay(4000);
+		//timer.start();
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(580, 220);
+		frame.setSize(580, 220); // 580, 220 is current (29-09-2017) optimal size for encrypt panel
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-	
+	/*
 	class TimerListener implements ActionListener {
 		
 		CardLayout cards = (CardLayout)mainCardPanel.getLayout();
@@ -56,7 +64,16 @@ public class FrameTEST {
 		}
 		
 	}
+    */
+	
+	/*
+	public void nextCard() {
+		CardLayout cards = (CardLayout)mainCardPanel.getLayout();
+		cards.next(mainCardPanel);
+	}
+	*/
 
+	
 	public static void main(String[] args) {
 		
 		FrameTEST test = new FrameTEST();

@@ -1,8 +1,12 @@
 package net.codejava.crypto;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,6 +24,9 @@ public abstract class EnterKeyPanel extends JPanel {
 	private JLabel charCount;
 	
 	AbstractDocument fieldDoc;
+	
+	protected JPanel mainCardPanel;
+	protected CardLayout cards;
 	
 	/**
 	 * Constructor. Build GUI-components.
@@ -49,6 +56,15 @@ public abstract class EnterKeyPanel extends JPanel {
 		this.add(flowPanel3);
 		addListenerToButton();
 		button.setEnabled(false);
+		
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showFirstCard();
+			}
+		});
+		flowPanel3.add(backButton);
+		
 		addFieldCharCounter();
 	}
 	
@@ -74,8 +90,8 @@ public abstract class EnterKeyPanel extends JPanel {
 	/**
 	 * Count the number of characters the user has typed in the textfield. 
 	 * Show this number by setting it as the text in the charCount-label.
-	 * Finally, enable or disable the 'Encrypt' button, it should only be
-	 * enabled after at least 16 characters have been entered.
+	 * Finally, enable or disable the 'Encrypt/Decrypt' button, it should 
+	 * only be enabled after at least 16 characters have been entered.
 	 */
 	public void checkFieldInput() {
 		
@@ -91,5 +107,9 @@ public abstract class EnterKeyPanel extends JPanel {
 	}
 	
 	public abstract void addListenerToButton();
+	
+	public void showFirstCard() {
+		cards.first(mainCardPanel);
+	}
 
 }

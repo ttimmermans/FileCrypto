@@ -10,7 +10,7 @@ import java.io.File;
 public class Test {
     public static void main(String[] args) {
         String key = "Mary has one cat";
-        File inputFile = new File("VolderVoorTest/Schermafdruk van 2017-02-10 09:47:54.png");
+        File inputFile = new File("VolderVoorTest/a.png");
         File encryptedFile = new File("document.encrypted");
         File decryptedFile = new File("document.decrypted");
          

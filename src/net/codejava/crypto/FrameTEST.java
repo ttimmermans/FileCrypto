@@ -19,7 +19,7 @@ public class FrameTEST {
 	
 	private JFrame frame;
 	private JPanel mainCardPanel;
-	private FyleChooserTEST chooser = new FyleChooserTEST();
+	//private FyleChooserTEST chooser = new FyleChooserTEST();
 	//TimerListener timerListener;
 	
 	public FrameTEST() {

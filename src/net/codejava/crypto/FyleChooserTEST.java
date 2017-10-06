@@ -15,7 +15,6 @@ public class FyleChooserTEST /* extends JFileChooser */ {
 		frame = new JFrame();
 	 	//this.setApproveButtonText("TEST");
 		chooser.setApproveButtonText("TEST");
-	 	chooser.setDialogTitle("Select files to Encrypt or Decrypt");
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(580, 220);
@@ -27,26 +26,31 @@ public class FyleChooserTEST /* extends JFileChooser */ {
 		
 		chooser.setMultiSelectionEnabled(true);
 		
+		//chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		
 		System.out.println("DirectorySelectionEnabled: " + chooser.isDirectorySelectionEnabled());
 	 	System.out.println("MultiSelectionEnabled: " + chooser.isMultiSelectionEnabled());
 		
-		//start();
-		go();
+		selectFiles();
+		//go();
 	}
 	
 	/**
 	 * Show filechooser so user can select files to encrypt or decrypt.
 	 */
-	public void start() {
+	public void selectFiles() {
+		chooser.setDialogTitle("Select files to Encrypt or Decrypt");
 	    int returnVal = chooser.showOpenDialog(frame);
 	    if(returnVal == JFileChooser.APPROVE_OPTION) {
 	    	File[] selectedFiles = chooser.getSelectedFiles();
 	    	for (File file: selectedFiles) {
 	    		System.out.println("You chose to select/open this file: " +
 	    				file.getName());
-	    	 	System.out.println("AbsolutePath: " + file.getAbsolutePath());
+	    	 	System.out.println("AbsolutePath of " + file.getName() + " : " 
+	    				+ file.getAbsolutePath());
+	    	 	System.out.println();
 	    	}
-	       System.out.println("chooser dialog closed");
+	       System.out.println("approve option clicked! chooser dialog closed");
 	    }
 	    else {
 	    	frame.remove(chooser);
@@ -61,7 +65,7 @@ public class FyleChooserTEST /* extends JFileChooser */ {
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
 			System.out.println(chooser.getCurrentDirectory());
 			System.out.println("absolute? " + chooser.getCurrentDirectory().isAbsolute());
-			System.out.println("chooser dialog closed");
+			System.out.println("approve option clicked! chooser dialog closed");
 		}
 		else {
 			frame.remove(chooser);

@@ -23,7 +23,7 @@ public abstract class EnterKeyPanel extends JPanel {
 	protected JButton button;
 	private JLabel charCount;
 	
-	AbstractDocument fieldDoc;
+	private AbstractDocument fieldDoc;
 	
 	protected JPanel mainCardPanel;
 	protected CardLayout cards;
@@ -50,20 +50,20 @@ public abstract class EnterKeyPanel extends JPanel {
 		flowPanel2.add(Box.createHorizontalStrut(40));
 		flowPanel2.add(keyField);
 		this.add(flowPanel2);
-
+		
 		JPanel flowPanel3 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JButton backButton = new JButton("Back");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cards.show(mainCardPanel, "radioButtons");
+			}
+		});
+		flowPanel3.add(backButton);
+
 		flowPanel3.add(button);
 		this.add(flowPanel3);
 		addListenerToButton();
 		button.setEnabled(false);
-		
-		JButton backButton = new JButton("Back");
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				showFirstCard();
-			}
-		});
-		flowPanel3.add(backButton);
 		
 		addFieldCharCounter();
 	}
@@ -107,9 +107,5 @@ public abstract class EnterKeyPanel extends JPanel {
 	}
 	
 	public abstract void addListenerToButton();
-	
-	public void showFirstCard() {
-		cards.first(mainCardPanel);
-	}
 
 }

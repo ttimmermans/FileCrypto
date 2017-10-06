@@ -20,12 +20,7 @@ public class StartPanel extends JPanel {
 		this.add(new EncryptButton());
 		this.add(new DecryptButton());
 	}
-	
-	public void nextCard() {
-		//CardLayout cards = (CardLayout)mainCardPanel.getLayout();
-		cards.next(mainCardPanel);
-	}
-	
+
 	private class EncryptButton extends JButton {
 		
 		public EncryptButton() {
@@ -33,7 +28,8 @@ public class StartPanel extends JPanel {
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("EncryptButton (main menu) Clicked");
-					nextCard();
+					FrameTEST.encryptMode = true;
+					cards.show(mainCardPanel, "radioButtons");
 				}
 			});
 		}
@@ -46,8 +42,8 @@ public class StartPanel extends JPanel {
 			this.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("DecryptButton (main menu) Clicked");
-					nextCard();
-					nextCard();
+					FrameTEST.encryptMode = false;
+					cards.show(mainCardPanel, "radioButtons");
 				}
 			});
 		}

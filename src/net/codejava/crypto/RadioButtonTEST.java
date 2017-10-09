@@ -16,17 +16,17 @@ public class RadioButtonTEST extends JPanel {
 	//private JPanel mainCardPanel;
 	//private CardLayout cards;
 
-	public RadioButtonTEST(JPanel mainCardPanel, CardLayout cards) {
+	public RadioButtonTEST(final JPanel mainCardPanel, final CardLayout cards) {
 
 		//this.mainCardPanel = mainCardPanel;
 		//this.cards = cards;
 
 		this.setLayout(new GridLayout(0, 1));
 
-		JRadioButton sameLocation = new JRadioButton("Same Location");
+		final JRadioButton sameLocation = new JRadioButton("Same Location");
 		sameLocation.setSelected(true);
 
-		JRadioButton otherLocation = new JRadioButton("Other Location");
+		final JRadioButton otherLocation = new JRadioButton("Other Location");
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(sameLocation);

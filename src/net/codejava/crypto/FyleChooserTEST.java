@@ -13,8 +13,6 @@ public class FyleChooserTEST /* extends JFileChooser */ {
 	public FyleChooserTEST() {
 		
 		frame = new JFrame();
-	 	//this.setApproveButtonText("TEST");
-		chooser.setApproveButtonText("TEST");
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(580, 220);
@@ -24,22 +22,26 @@ public class FyleChooserTEST /* extends JFileChooser */ {
 		
 		System.out.println("finished building frame");
 		
-		chooser.setMultiSelectionEnabled(true);
-		
 		//chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		
 		System.out.println("DirectorySelectionEnabled: " + chooser.isDirectorySelectionEnabled());
 	 	System.out.println("MultiSelectionEnabled: " + chooser.isMultiSelectionEnabled());
 		
-		selectFiles();
-		//go();
+		//chooseFiles();
+		chooseDirectory();
 	}
 	
 	/**
-	 * Show filechooser so user can select files to encrypt or decrypt.
+	 * Show the chooser so user can select files to encrypt or decrypt.
 	 */
-	public void selectFiles() {
+	public void chooseFiles() {
+		
 		chooser.setDialogTitle("Select files to Encrypt or Decrypt");
+		chooser.setApproveButtonText("TEST_123");
+		
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.setMultiSelectionEnabled(true);
+		
 	    int returnVal = chooser.showOpenDialog(frame);
 	    if(returnVal == JFileChooser.APPROVE_OPTION) {
 	    	File[] selectedFiles = chooser.getSelectedFiles();
@@ -58,18 +60,28 @@ public class FyleChooserTEST /* extends JFileChooser */ {
 	}
 	
 	/**
-	 * 
+	 * Show the chooser and let the user select one single directory.
 	 */
-	public void go() {
+	public void chooseDirectory() {
+		
+		chooser.setDialogTitle("Select directory where encrypted files " +
+				"will be saved");
+		
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		chooser.setMultiSelectionEnabled(false);
+		
 		int returnVal = chooser.showSaveDialog(frame);
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			System.out.println(chooser.getCurrentDirectory());
-			System.out.println("absolute? " + chooser.getCurrentDirectory().isAbsolute());
+			//System.out.println(chooser.getCurrentDirectory());
+			//System.out.println("absolute? " + chooser.getCurrentDirectory().isAbsolute());
+			System.out.println("Name of chosen dir: " + chooser.getSelectedFile().getName());
+			System.out.println("Path of chosen dir: " + chooser.getSelectedFile().getPath());
+			System.out.println("Is above path absolute? " + chooser.getSelectedFile().isAbsolute());
 			System.out.println("approve option clicked! chooser dialog closed");
 		}
 		else {
 			frame.remove(chooser);
-		}
+		}		
 	}
 	
 	public static void main(String[] args) {

@@ -35,10 +35,13 @@ public class RadioButtonTEST extends JPanel {
 		this.add(sameLocation);
 		this.add(otherLocation);
 		
-		JPanel flowPanel = new JPanel(new FlowLayout());
+		JPanel leftFlowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel rightFlowPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		
 		JPanel buttonGrid = new JPanel(new GridLayout(1, 2));
-		flowPanel.add(buttonGrid);
-		this.add(flowPanel);
+		buttonGrid.add(leftFlowPanel);
+		buttonGrid.add(rightFlowPanel);
+		this.add(buttonGrid);
 		
 		JButton backButton = new JButton("Back");
 		backButton.addActionListener(new ActionListener() {
@@ -46,7 +49,7 @@ public class RadioButtonTEST extends JPanel {
 				cards.show(mainCardPanel, "startPanel");
 			}
 		});
-	    buttonGrid.add(backButton);
+	    leftFlowPanel.add(backButton);
 	    
 	    JButton nextButton = new JButton("Next");
 	    nextButton.addActionListener(new ActionListener() {
@@ -66,7 +69,7 @@ public class RadioButtonTEST extends JPanel {
 	    		}
 	    	}
 	    });
-	    buttonGrid.add(nextButton);
+	    rightFlowPanel.add(nextButton);
 
 		//System.out.println(sameLocation.isSelected());
 		//System.out.println(otherLocation.isSelected());

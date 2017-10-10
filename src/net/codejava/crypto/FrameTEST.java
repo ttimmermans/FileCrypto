@@ -61,7 +61,7 @@ public class FrameTEST {
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(580, 220); // 580, 220 is current (29-09-2017) optimal size for encrypt panel
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}

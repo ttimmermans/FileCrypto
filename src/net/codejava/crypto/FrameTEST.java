@@ -16,18 +16,17 @@ import javax.swing.JPanel;
 
 /**
  * @author Thomas Timmermans
- * @version 06-10-2017
+ * @version 13-10-2017
  */
 public class FrameTEST {
 	
 	private JFrame frame;
 	private JPanel mainCardPanel;
-	//private FyleChooserTEST chooser = new FyleChooserTEST();
+	private FyleChooserTEST chooser;
 	
-	/* encryptMode indicates if files chosen by user should be encrypted or 
-	 * decrypted. This property is checked by the "next" button in the panel
-	 * with the radio buttons and toggled by the "encrypt" and "decrypt" buttons
-	 * in the startPanel being clicked. */
+	/* encryptMode indicates if files are to be encrypted or decrypted, it's 
+	 * checked by multiple other classes to assign the right actions to buttons, 
+	 * set appropriate label texts and so on. */ 
 	static boolean encryptMode;
 	
 	/**
@@ -43,20 +42,21 @@ public class FrameTEST {
 		mainCardPanel = new JPanel(cardLayout);
 		contentPane.add(mainCardPanel);
 		
-		StartPanel startPanel = new StartPanel(mainCardPanel, cardLayout);
-	 	cardLayout.addLayoutComponent(startPanel, "startPanel");
-		mainCardPanel.add(startPanel);
-		
-		EncryptPanel encryptPanel = new EncryptPanel(mainCardPanel, cardLayout);
-		cardLayout.addLayoutComponent(encryptPanel, "encryptPanel");
-		mainCardPanel.add(encryptPanel);
-		
-		DecryptPanel decryptPanel = new DecryptPanel(mainCardPanel, cardLayout);
-		cardLayout.addLayoutComponent(decryptPanel, "decryptPanel");
-		mainCardPanel.add(decryptPanel);
+		chooser = new FyleChooserTEST(frame, mainCardPanel, cardLayout);
 		
 		RadioButtonTEST radioButtonz = new RadioButtonTEST(mainCardPanel, cardLayout);
+		StartPanel startPanel = new StartPanel(chooser, radioButtonz);
+		EncryptPanel encryptPanel = new EncryptPanel(mainCardPanel, cardLayout);
+		DecryptPanel decryptPanel = new DecryptPanel(mainCardPanel, cardLayout);
+		
+	 	cardLayout.addLayoutComponent(startPanel, "startPanel");
+		cardLayout.addLayoutComponent(encryptPanel, "encryptPanel");
+		cardLayout.addLayoutComponent(decryptPanel, "decryptPanel");
 		cardLayout.addLayoutComponent(radioButtonz, "radioButtons");
+		
+		mainCardPanel.add(startPanel);
+		mainCardPanel.add(encryptPanel);
+		mainCardPanel.add(decryptPanel);
 		mainCardPanel.add(radioButtonz);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,10 +66,18 @@ public class FrameTEST {
 		frame.setVisible(true);
 	}
 	
+	
+
 	public static void main(String[] args) {
 		
 		FrameTEST test = new FrameTEST();
 
 	}
+	
+	/*
+	 * https://stackoverflow.com/questions/3519151/how-to-limit-the-number-of-characters-in-jtextfield
+	 * 
+	 * http://docs.oracle.com/javase/tutorial/uiswing/components/generaltext.html#filter
+	 */
 
 }

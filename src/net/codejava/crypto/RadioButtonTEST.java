@@ -15,25 +15,40 @@ public class RadioButtonTEST extends JPanel {
 
 	//private JPanel mainCardPanel;
 	//private CardLayout cards;
+	
+	final JRadioButton sameLocation;
+	final JRadioButton otherLocation;
 
 	public RadioButtonTEST(final JPanel mainCardPanel, final CardLayout cards) {
 
 		//this.mainCardPanel = mainCardPanel;
 		//this.cards = cards;
-
+		
 		this.setLayout(new GridLayout(0, 1));
 
-		final JRadioButton sameLocation = new JRadioButton("Same Location");
+		sameLocation = new JRadioButton();
 		sameLocation.setSelected(true);
 
-		final JRadioButton otherLocation = new JRadioButton("Other Location");
+		otherLocation = new JRadioButton();
 
 		ButtonGroup group = new ButtonGroup();
 		group.add(sameLocation);
 		group.add(otherLocation);
 
-		this.add(sameLocation);
-		this.add(otherLocation);
+		JPanel radioButtonFlowPanel = new JPanel();
+		JPanel radioButtonGrid = new JPanel(new GridLayout(0, 1));
+		
+		JPanel horizontalFlow1 = new JPanel(new FlowLayout(FlowLayout.LEFT));//
+		JPanel horizontalFlow2 = new JPanel(new FlowLayout(FlowLayout.LEFT));//
+		
+		radioButtonGrid.add(horizontalFlow1/* sameLocation */);
+		radioButtonGrid.add(horizontalFlow2/* otherLocation */);
+		
+		horizontalFlow1.add(sameLocation);                                   //
+		horizontalFlow2.add(otherLocation);                                  //
+		
+		radioButtonFlowPanel.add(radioButtonGrid);
+		this.add(radioButtonFlowPanel);
 		
 		JPanel leftFlowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPanel rightFlowPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -73,6 +88,23 @@ public class RadioButtonTEST extends JPanel {
 
 		//System.out.println(sameLocation.isSelected());
 		//System.out.println(otherLocation.isSelected());
+
+	}
+	
+	/**
+	 * Set the text of the radiobuttons which differs depending on if files are 
+	 * about to be encrypted or decrypted. 
+	 */
+	public void setRadioButtonTexts() {
+		
+		String s = FrameTEST.encryptMode ? "encrypted" : "decrypted";
+
+		sameLocation.setText("Same Location - Save the " + s + " files at " +
+				"the same location.");
+
+		otherLocation.setText("Other Location - Save the " + s + " files to " +
+				"a location of your choice.");
+		
 	}
 
 }

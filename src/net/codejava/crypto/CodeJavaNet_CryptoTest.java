@@ -7,7 +7,7 @@ import java.io.File;
  * @author www.codejava.net
  *
  */
-public class Test {
+public class CodeJavaNet_CryptoTest {
     public static void main(String[] args) {
         String key = "Mary has one cat";
         File inputFile = new File("VolderVoorTest/a.png");

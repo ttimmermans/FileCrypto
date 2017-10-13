@@ -26,7 +26,7 @@ public class EncryptPanel extends EnterKeyPanel {
 	}
 	
 	private static String labelTxt = 
-	"<html>Please choose a password to encrypt the file with!<br>"
+	"<html>Please choose a password to encrypt the files with!<br>"
 	+"Be <i>VERY CAREFUL</i> to remember this password as <br>"
 	+"There is no way to decrypt and recover your files if you forget this!<br>"
     +"<br>The password must be <i>AT LEAST</i> 16 characters long.</html>";

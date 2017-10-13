@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 
 public class StartPanel extends JPanel {
 	
-	private JPanel mainCardPanel;
-	private CardLayout cards;
+	FyleChooserTEST chooser;
+	RadioButtonTEST rBttnTest;
 	
-	public StartPanel(JPanel mainCardPanel, CardLayout cards) {
-		this.mainCardPanel = mainCardPanel;
-		this.cards = cards;
+	public StartPanel(FyleChooserTEST chooser, RadioButtonTEST rBttnTest) {
+		this.chooser = chooser;
+		this.rBttnTest = rBttnTest;
 		this.setLayout(new GridLayout(1, 2));
 		this.add(new EncryptButton());
 		this.add(new DecryptButton());
@@ -29,7 +29,9 @@ public class StartPanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("EncryptButton (main menu) Clicked");
 					FrameTEST.encryptMode = true;
-					cards.show(mainCardPanel, "radioButtons");
+					rBttnTest.setRadioButtonTexts();
+					chooser.selectFiles();
+					//cards.show(mainCardPanel, "radioButtons");
 				}
 			});
 		}
@@ -43,7 +45,9 @@ public class StartPanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("DecryptButton (main menu) Clicked");
 					FrameTEST.encryptMode = false;
-					cards.show(mainCardPanel, "radioButtons");
+					rBttnTest.setRadioButtonTexts();
+					chooser.selectFiles();
+					//cards.show(mainCardPanel, "radioButtons");
 				}
 			});
 		}

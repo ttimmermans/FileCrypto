@@ -10,7 +10,7 @@ import java.io.File;
 public class CodeJavaNet_CryptoTest {
     public static void main(String[] args) {
         String key = "Mary has one cat";
-        File inputFile = new File("VolderVoorTest/a.png");
+        File inputFile = new File("VolderVoorTest/bla.txt");
         File encryptedFile = new File("document.encrypted");
         File decryptedFile = new File("document.decrypted");
          

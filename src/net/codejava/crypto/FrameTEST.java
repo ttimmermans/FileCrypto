@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 //search-term was: "runnable jar with custom icon"
 //https://stackoverflow.com/questions/19927509/set-icon-for-executable-jar-file
-
+//test 09-05-2018
 /**
  * @author Thomas Timmermans
  * @version 13-10-2017
